@@ -104,10 +104,10 @@ namespace AndroidXmlTranslater
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine("ERROR!!! " + ex.Message);
+                   
                     Task<String> islem = Task.Run<String>(() =>
                     {
-                        return "Error";
+                        return "ERROR!!! " + ex.Message;
                     });
                     return islem.Result;
                 }
