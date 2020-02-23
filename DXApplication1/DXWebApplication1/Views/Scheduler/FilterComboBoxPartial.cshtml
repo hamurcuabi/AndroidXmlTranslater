@@ -1,0 +1,17 @@
+<div class="filer-combo-box-container">
+@Html.DevExpress().ComboBox(comboBoxSettings => {
+    comboBoxSettings.Name = "filterComboBox";
+    comboBoxSettings.Properties.Caption = "Filter";
+
+    comboBoxSettings.Properties.DropDownStyle = DropDownStyle.DropDownList;
+    comboBoxSettings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Never;
+    comboBoxSettings.Properties.NullText = "Filter...";
+
+    comboBoxSettings.ControlStyle.CssClass = "filter-combo-box";
+    comboBoxSettings.Properties.CaptionCellStyle.CssClass = "filter-combo-box-caption";
+
+    comboBoxSettings.Properties.Items.Add("Filter 1", 1);
+    comboBoxSettings.Properties.Items.Add("Filter 2", 2);
+    comboBoxSettings.Properties.Items.Add("Filter 3", 3);
+}).GetHtml()
+</div>

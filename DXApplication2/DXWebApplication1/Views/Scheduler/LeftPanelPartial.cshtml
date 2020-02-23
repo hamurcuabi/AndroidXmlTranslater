@@ -1,0 +1,23 @@
+<h3 class="leftpanel-section section-caption center-aligned">Selected dates</h3>
+@Html.DevExpress().DateNavigator(DXWebApplication1.Model.SchedulerHelper.Settings).Bind(Model.Appointments, Model.Resources).GetHtml()
+<h3 class="section-caption">Resources:</h3>
+@Html.DevExpress().ListBox(listBoxSettings => {
+    listBoxSettings.Name = "resourcesListBox";
+
+    listBoxSettings.Properties.TextField = "Name";
+    listBoxSettings.Properties.ValueField = "Id";
+    listBoxSettings.Properties.ValueType = typeof(Int64);
+
+    listBoxSettings.Properties.SelectionMode = ListEditSelectionMode.CheckColumn;
+    listBoxSettings.Properties.EnableSelectAll = true;
+
+    listBoxSettings.Width = Unit.Percentage(100);
+    listBoxSettings.Height = Unit.Pixel(332);
+    listBoxSettings.ControlStyle.CssClass = "resources-listbox";
+
+    listBoxSettings.Properties.ClientSideEvents.SelectedIndexChanged = "onResourcesListBoxSelectedIndexChanged";
+
+    listBoxSettings.PreRender = (sender, args) => {
+        ((MVCxListBox)sender).SelectAll();
+    };
+}).BindList(Model.Resources).GetHtml()

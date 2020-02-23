@@ -1,0 +1,54 @@
+﻿@model XmlTranslaterWeb.Models.Country
+@{
+    ViewBag.Title = "Home Page";
+}
+
+@using (Ajax.BeginForm("UploadFile", "Home",
+    new AjaxOptions { HttpMethod = "POST" }, new { enctype = "multipart/form-data" }))
+{
+    @*<input type="file" name="uploadFile" class="form-control-file" />
+          <br />
+          <input type="submit" value="uploadFile" class="btn btn-success" />
+
+        @Html.DropDownListFor(m => m.code, new SelectList(ViewBag.Countries, "name", "code"), new { @class = "standardSelect" })*@
+
+
+
+
+    <div class="sufee-login d-flex align-content-center flex-wrap">
+        <div class="container">
+            <div class="login-content">
+
+                <div class="login-form">
+                    <form>
+                        <div class="form-group">
+                            <input type="file" name="uploadFile" class="form-control-file" />
+                        </div>
+                        <div class="form-group">
+
+                            @Html.DropDownListFor(m => m.code, new SelectList(ViewBag.Countries, "name", "code"), new { @class = "btn btn-secondary dropdown-toggle" })
+                        </div>
+
+                        <button type="submit" class="btn btn-success btn-flat m-b-30 m-t-30"><i class="fa fa-language"></i> Translate</button>
+
+                    </form>
+                </div>
+            </div>
+            <div class="card align-content-center">
+                <div class="card-header">
+                    <strong class="card-title">Usage</strong>
+                </div>
+                <div class="card-body">
+                    <div class="alert alert-success" role="alert">
+                        <p>Firstly select your string.xml file then select the language that will be translated. Click translate button thats it!</p>
+                        <hr>
+                        <p class="mb-0">Your string languages will be automatically detect and translate. It can take time depends on size of your xml, just be patient :)</p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+      
+    </div>
+
+}

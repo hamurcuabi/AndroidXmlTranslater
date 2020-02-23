@@ -1,0 +1,13 @@
+@model DXWebApplication1.Model.Issue
+
+@{
+    ViewBag.Title = "GridView Details Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="text-content">
+    <h1 class="title" id="SubjectText">@Model.Subject</h1>
+    <p>Issue #@Model.Id</p>
+    <hr />
+    <p>This is the GridView details page.</p>
+</div>

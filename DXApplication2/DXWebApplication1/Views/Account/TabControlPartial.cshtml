@@ -1,0 +1,9 @@
+@Html.DevExpress().TabControl(
+    settings => {
+        settings.Name = "SignInRegisterTabControl";
+        settings.TabAlign = TabAlign.Justify;
+        settings.Width = Unit.Percentage(100);
+        settings.ControlStyle.Paddings.Padding = Unit.Pixel(0);
+        settings.Tabs.Add("Sign In", "", "", "SignIn");
+        settings.Tabs.Add("Register", "", "", "Register");
+}).GetHtml()

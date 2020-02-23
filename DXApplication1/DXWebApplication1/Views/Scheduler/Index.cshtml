@@ -1,0 +1,72 @@
+@model DXWebApplication1.Model.SchedulerDataSource
+
+@{
+    ViewBag.Title = "Scheduler";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Head {
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/Scheduler.css")" />
+    <script type="text/javascript" src="@Url.Content("~/Content/Scheduler.js")"></script>
+}
+
+@section LeftPanelContent {
+    @Html.Partial("LeftPanelPartial")
+}
+
+@section PageToolbar {
+    @Html.DevExpress().Menu(menuSettings => {
+        menuSettings.Name = "schedulerToolbar";
+        menuSettings.ItemAutoWidth = false;
+        menuSettings.AllowSelectItem = false;
+        menuSettings.ApplyItemStyleToTemplates = true;
+
+        menuSettings.Width = Unit.Percentage(100);
+
+        menuSettings.SettingsAdaptivity.Enabled = true;
+        menuSettings.SettingsAdaptivity.EnableAutoHideRootItems = true;
+        menuSettings.SettingsAdaptivity.EnableCollapseRootItemsToIcons = true;
+        menuSettings.SettingsAdaptivity.CollapseRootItemsToIconsAtWindowInnerWidth = 600;
+
+        menuSettings.ControlStyle.SeparatorWidth = 0;
+        menuSettings.ControlStyle.CssClass = "page-toolbar";
+
+        menuSettings.Styles.Item.CssClass = "item";
+        menuSettings.Styles.Item.Wrap = DefaultBoolean.False;
+        menuSettings.Styles.Item.VerticalAlign = VerticalAlign.Middle;
+
+        menuSettings.Images.Item.Width = Unit.Pixel(16);
+        menuSettings.Images.Item.Height = Unit.Pixel(16);
+
+        menuSettings.Items.Add(item => {
+            item.Enabled = false;
+            item.SetTemplateContent(c => { ViewContext.Writer.Write("<h1>Scheduler</h1>"); });
+        });
+        menuSettings.Items.Add(item => {
+            item.Name = "AdvancedFilter";
+            item.Alignment = MenuItemAlignment.Right;
+            item.AdaptivePriority = 10;
+            item.SetTemplateContent(c => {
+                Html.RenderPartial("FilterComboBoxPartial");
+            });
+        });
+        menuSettings.Items.Add(item => {
+            item.Name = "Export";
+            item.Text = "Export";
+            item.Alignment = MenuItemAlignment.Right;
+            item.AdaptivePriority = 10;
+            item.Image.Url = "Content/Images/export.svg";
+        });
+        menuSettings.Items.Add(item => {
+            item.Name = "Print";
+            item.Text = "Print";
+            item.Alignment = MenuItemAlignment.Right;
+            item.AdaptivePriority = 10;
+            item.Image.Url = "Content/Images/print.svg";
+        });
+    }).GetHtml()
+}
+@using(Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.Partial("SchedulerPartial")
+}

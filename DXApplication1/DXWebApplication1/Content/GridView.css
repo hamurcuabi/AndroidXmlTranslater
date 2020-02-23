@@ -1,0 +1,140 @@
+/* Left Panel */
+.filters-navbar .item,
+.filters-navbar ul.dxnb-content
+{
+    border-right: none;
+}
+
+.filters-navbar .item
+{
+    padding-left: 24px !important;
+}
+
+/* GridView borders */
+.grid-view:focus
+{
+    outline: none;
+}
+
+.grid-view .dxgvCSD,
+.grid-view .pager
+{
+    border-left: none;
+    border-right: none;
+}
+.grid-view .dxgvLVR > td.dxgv
+{
+    border-bottom: none !important;
+}
+
+/* GridView Custom Styles */
+.grid-view .votes-column
+{
+    display: inline-block;
+    min-width: 1em;
+    min-height: 1em;
+    font-size: 11px;
+    line-height: .99;
+    border-radius: 2em;
+    background-color: rgba(0, 0, 0, 0.1);
+    padding: 3px 5px 2px;
+    text-align: center;
+}
+
+.grid-view .status-column
+{
+    display: inline-block;
+    min-width: 1em;
+    min-height: 1em;
+    font-size: 11px;
+    text-transform: uppercase;
+    line-height: .99;
+    border-radius: 3px;
+    border: solid 1px #ccc;
+    padding: 2px 5px;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.02);
+}
+
+.grid-view .focused .status-column
+{
+    border: solid 1px #fff;
+}
+
+.grid-view .status-column.active
+{
+    font-weight: bold;
+}
+
+.grid-view .status-column.active::after
+{
+    content: "active";
+}
+
+.grid-view .status-column.closed::after
+{
+    content: "closed";
+}
+
+.grid-view .column-image
+{
+    width: 12px;
+    height: 12px;
+}
+
+.grid-view .priority1
+{
+    background-image: url('Images/priority1.svg');
+}
+
+.grid-view .priority2
+{
+    background-image: url('Images/priority2.svg');
+}
+
+.grid-view .priority3
+{
+    background-image: url('Images/priority3.svg');
+}
+
+.grid-view .focused .priority1
+{
+    background-image: url('Images/priority1-white.svg');
+}
+
+.grid-view .focused .priority2
+{
+    background-image: url('Images/priority2-white.svg');
+}
+
+.grid-view .focused .priority3
+{
+    background-image: url('Images/priority3-white.svg');
+}
+
+.grid-view .kind1
+{
+    background-image: url('Images/kind1.svg');
+}
+
+.grid-view .kind2
+{
+    background-image: url('Images/kind2.svg');
+}
+
+.grid-view .focused .kind1
+{
+    background-image: url('Images/kind1-white.svg');
+}
+
+.grid-view .focused .kind2
+{
+    background-image: url('Images/kind2-white.svg');
+}
+
+/* GridView filter panel */
+.filter-panel
+{
+    padding: 16px;
+    padding-left: 18px;
+}

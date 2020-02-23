@@ -1,0 +1,109 @@
+@using DXWebApplication1.Model
+@model SignInViewModel
+@{
+    ViewBag.Title = "Sign In";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Head {
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/SignInRegister.css")" />
+    <script type="text/javascript" src="@Url.Content("~/Content/SignInRegister.js")"></script>
+}
+
+<div class="formLayout-verticalAlign">
+    <div class="formLayout-container">
+        @Html.Partial("TabControlPartial")
+
+        @using(Html.BeginForm("SignIn", "Account", FormMethod.Post)) {
+            @Html.AntiForgeryToken()
+
+            @Html.DevExpress().FormLayout(settings => {
+           settings.Name = "formLayout";
+           settings.UseDefaultPaddings = false;
+           settings.SettingsAdaptivity.AdaptivityMode = FormLayoutAdaptivityMode.SingleColumnWindowLimit;
+           settings.SettingsItemCaptions.Location = LayoutItemCaptionLocation.Top;
+           settings.Styles.LayoutGroup.Cell.Paddings.Padding = Unit.Pixel(0);
+           settings.Styles.LayoutItem.Paddings.PaddingBottom = Unit.Pixel(8);
+
+           var groupItem = settings.Items.AddGroupItem(i => {
+               i.ShowCaption = DefaultBoolean.False;
+               i.GroupBoxDecoration = GroupBoxDecoration.None;
+               i.Paddings.Padding = Unit.Pixel(16);
+
+           });
+           groupItem.Items.Add(m => m.UserName, i => {
+               i.HelpText = "Please, enter your login name";
+               i.NestedExtension().TextBox(s => {
+                   s.Width = Unit.Percentage(100);
+                   s.ShowModelErrors = true;
+                   s.Properties.ValidationSettings.Display = Display.Dynamic;
+                   s.Properties.ValidationSettings.SetFocusOnError = true;
+                   s.Properties.ValidationSettings.ErrorTextPosition = ErrorTextPosition.Bottom;
+                   s.Properties.ValidationSettings.ErrorDisplayMode = ErrorDisplayMode.ImageWithText;
+
+                   s.Properties.ClientSideEvents.Init = "function(s, e){ s.Focus(); }";
+               });
+           });
+
+           groupItem.Items.Add(m => m.Password, i => {
+               i.NestedExtension().ButtonEdit(s => {
+                   s.Width = Unit.Percentage(100);
+                   s.ShowModelErrors = true;
+                   s.Properties.ValidationSettings.Display = Display.Dynamic;
+                   s.Properties.ValidationSettings.SetFocusOnError = true;
+                   s.Properties.ValidationSettings.ErrorTextPosition = ErrorTextPosition.Bottom;
+                   s.Properties.ValidationSettings.ErrorDisplayMode = ErrorDisplayMode.ImageWithText;
+
+                   s.Properties.Password = true;
+                   s.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Never;
+                   s.Properties.ClientSideEvents.ButtonClick = "onPasswordButtonEditButtonClick";
+
+                   s.Properties.ButtonStyle.Border.BorderWidth = Unit.Pixel(0);
+                   s.Properties.ButtonStyle.Width = Unit.Pixel(6);
+                   s.Properties.ButtonStyle.CssClass = "eye-button";
+                   s.Properties.ButtonStyle.HoverStyle.BackColor = System.Drawing.Color.Transparent;
+                   s.Properties.ButtonStyle.PressedStyle.BackColor = System.Drawing.Color.Transparent;
+
+                   s.SetButtonTemplateContent("<div></div>");
+                   s.Properties.Buttons.Add();
+               });
+           });
+
+           groupItem.Items.Add(m => m.RememberMe, i => {
+               i.ShowCaption = DefaultBoolean.False;
+               i.Paddings.PaddingTop = Unit.Pixel(13);
+               i.NestedExtension().CheckBox(s => {
+                   s.Text = "Remember me";
+               });
+           });
+
+           groupItem.Items.Add(itemSettings => {
+               itemSettings.ShowCaption = DefaultBoolean.False;
+               itemSettings.Visible = ViewBag.GeneralError != null;
+               itemSettings.SetNestedContent(() => {
+                   ViewContext.Writer.Write("<div class=\"formLayout-generalErrorText\">" + @ViewBag.GeneralError + "</div>");
+               });
+           });
+
+           groupItem = settings.Items.AddGroupItem(i => {
+               i.ShowCaption = DefaultBoolean.False;
+               i.GroupBoxDecoration = GroupBoxDecoration.HeadingLine;
+               i.Paddings.PaddingTop = Unit.Pixel(13);
+               i.Paddings.PaddingBottom = Unit.Pixel(13);
+               i.GroupBoxStyle.CssClass = "formLayout-groupBox";
+           });
+           groupItem.Items.Add(i => {
+               i.ShowCaption = DefaultBoolean.False;
+               i.HorizontalAlign = FormLayoutHorizontalAlign.Center;
+               i.Paddings.Padding = Unit.Pixel(0);
+               i.NestedExtension().Button(s => {
+                   s.Name = "SignInButton";
+                   s.Width = Unit.Pixel(200);
+                   s.Text = "Log In";
+                   s.UseSubmitBehavior = true;
+               });
+           });
+
+       }).GetHtml()
+        }
+    </div>
+</div>

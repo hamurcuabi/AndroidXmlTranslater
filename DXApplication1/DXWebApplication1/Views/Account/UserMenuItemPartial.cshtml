@@ -1,0 +1,22 @@
+@model DXWebApplication1.Model.ApplicationUser
+
+@{
+    var avatarUrl = string.IsNullOrEmpty(Model.AvatarUrl) ? "Content/Images/user.svg" : Model.AvatarUrl;
+}
+<div class="user-info">
+    <div class="avatar">
+        <img id="AvatarUrl" src="@Url.Content(avatarUrl)" />
+    </div>
+    <div class="text-container">
+        @Html.DevExpress().Label(labelSettings => {
+           labelSettings.Name = "userNameLabel";
+           labelSettings.Text = Model.UserName + " (" + Model.FirstName + " " + Model.LastName + ")";
+           labelSettings.ControlStyle.CssClass = "user-name";
+       }).GetHtml()
+       @Html.DevExpress().Label(labelSettings => {
+           labelSettings.Name = "emailLabel";
+           labelSettings.Text = Model.Email;
+           labelSettings.ControlStyle.CssClass = "email";
+       }).GetHtml()
+    </div>
+</div>

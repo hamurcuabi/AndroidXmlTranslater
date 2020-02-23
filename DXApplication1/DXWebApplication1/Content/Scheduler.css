@@ -1,0 +1,58 @@
+/* Left Panel */
+.date-navigator
+{
+    border: none;
+}
+.date-navigator-header
+{
+    height: 22px;
+}
+
+.resources-listbox
+{
+    border: none;
+}
+
+/* Content */
+.content .scheduler .dxscRendererTable
+{
+    border: 1px solid transparent;
+}
+
+.content .scheduler td[class^="dxscToolbarContainer"]
+{
+    border-radius: 0;
+    border: none;
+}
+
+.content .scheduler .dxscAgendaViewScrollContainer
+{
+    border-left: none;
+    border-right: none;
+}
+
+.content .scheduler .dxscAgendaView tr:last-of-type .dxsc-agenda-apt > table
+{
+    border-bottom: none;
+}
+
+/* Toolbar */
+.filter-combo-box
+{
+    width: 220px;
+}
+.filter-combo-box-container
+{
+    padding-right: 8px;
+}
+@media (max-width: 600px)
+{
+    .filter-combo-box
+    {
+        width: 100px;
+    }
+    .filter-combo-box-caption
+    {
+        display: none;
+    }
+}

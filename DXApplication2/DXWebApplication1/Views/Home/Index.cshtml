@@ -1,0 +1,12 @@
+@{
+    ViewBag.Title = "Home";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section LeftPanelContent {
+    @Html.Partial("LeftPanelPartial")
+}
+
+<div class="text-content" id="TextContent">
+    @Html.Raw(File.ReadAllText(Server.MapPath(@"~/App_Data/Overview.html")))
+</div>

@@ -1,0 +1,74 @@
+body
+{
+    background-color: #ebebeb;
+    height: 100%;
+}
+
+.form 
+{
+    padding-bottom: 0;
+}
+
+.content
+{
+    display: table;
+}
+
+.formLayout-verticalAlign
+{
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.formLayout-container
+{
+    background-color: white;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 362px;
+    box-shadow: 0px 1px 4px 0 rgba(0, 0, 0, 0.2) !important;
+    border-radius: 2px;
+}
+
+.formLayout-groupBox
+{
+    margin: 0;
+    padding: 0 !important;
+}
+
+.formLayout-generalErrorText
+{
+    color: red;
+    padding-top: 1em;
+}
+
+.eye-button
+{
+    background: none;
+}
+
+.eye-button > div
+{
+    background: url('Images/eye-button.svg') no-repeat center;
+    width: 18px;
+    height: 12px;
+    vertical-align: baseline;
+    pointer-events: none;
+    user-select: none;
+}
+.eye-button.show-password > div
+{
+    background: url('Images/eye-button-hide.svg') no-repeat center;
+}
+
+input[type=password]::-ms-reveal,
+input[type=password]::-ms-clear
+{
+    display: none;
+}
+
+.footer-wrapper
+{
+    position: static;
+    display: table-row;
+}

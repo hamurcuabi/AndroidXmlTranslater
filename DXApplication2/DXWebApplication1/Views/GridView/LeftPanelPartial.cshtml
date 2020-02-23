@@ -1,0 +1,33 @@
+<h3 class="leftpanel-section section-caption">Filters</h3>
+@Html.DevExpress().NavBar(navBarSettings => {
+    navBarSettings.Name = "filtersNavBar";
+    navBarSettings.AllowSelectItem = true;
+    navBarSettings.ShowGroupHeaders = false;
+    navBarSettings.Width = Unit.Percentage(100);
+    navBarSettings.ControlStyle.CssClass = "filters-navbar";
+    navBarSettings.Styles.Item.CssClass = "item";
+    navBarSettings.Groups.Add(group => {
+        group.Items.Add(item => {
+            item.Name = "All";
+            item.Text = "All";
+            item.Selected = true;
+        });
+        group.Items.Add(item => {
+            item.Name = "Active";
+            item.Text = "Active issues";
+        });
+        group.Items.Add(item => {
+            item.Name = "Bugs";
+            item.Text = "Bugs";
+        });
+        group.Items.Add(item => {
+            item.Name = "Suggestions";
+            item.Text = "Suggestions";
+        });
+        group.Items.Add(item => {
+            item.Name = "HighPriority";
+            item.Text = "High priority";
+        });
+    });
+    navBarSettings.ClientSideEvents.ItemClick = "onFiltersNavBarItemClick";
+}).GetHtml()

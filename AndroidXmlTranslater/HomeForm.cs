@@ -7,6 +7,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -16,6 +17,7 @@ namespace AndroidXmlTranslater
 {
     public partial class HomeForm : Form
     {
+        private static readonly HttpClient client = new HttpClient();
         public static int Rate = 0;
         public static int Count = 0;
         public HomeForm()
@@ -34,7 +36,7 @@ namespace AndroidXmlTranslater
 
             }
         }
-        private void GetStrings(String filePath)
+        public void GetStrings(String filePath)
         {
 
             xmlObjects = new BindingList<XmlObject>();
@@ -64,7 +66,8 @@ namespace AndroidXmlTranslater
             foreach (XmlObject item in xmlObjects)
             {
                 String trText = await Translate(item.old_value);
-                item.new_value = trText;
+                var response = Newtonsoft.Json.JsonConvert.DeserializeObject<Translation>(trText);
+                item.new_value = response.text[0];
                 Count += 1;
                 Rate = ((Count * 100) / xmlObjects.Count);
 
@@ -74,45 +77,23 @@ namespace AndroidXmlTranslater
         }
         private async Task<String> Translate(String text)
         {
-            using (var wb = new WebClient())
-            {
-                var reqData = new NameValueCollection();
-                reqData["text"] = text; // text to translate
-                reqData["lang"] = txtLang.Text; // target language
-                reqData["key"] = "trnsl.1.1.20180719T155226Z.d2f3a41e023a4b8e.ddf417ba5c68359f7cde322cc0097c32eacec422";
-
-                try
+            var values = new Dictionary<string, string>
                 {
-                    Task<String> islem = Task.Run<String>(() =>
-                     {
-                         var response = wb.UploadValues("https://translate.yandex.net/api/v1.5/tr.json/translate", "POST", reqData);
-                         string responseInString = Encoding.UTF8.GetString(response);
+                { "text", text },
+                { "lang", "tr" },
+                { "key", "trnsl.1.1.20180719T155226Z.d2f3a41e023a4b8e.ddf417ba5c68359f7cde322cc0097c32eacec422" }
+                };
 
-                         var rootObject = JsonConvert.DeserializeObject<Translation>(responseInString);
-                         //Console.WriteLine($"Original text: {reqData["text"]}\n" +
-                         //    $"Translated text: {rootObject.text[0]}\n" +
-                         //    $"Lang: {rootObject.lang}");
+            var content = new FormUrlEncodedContent(values);
 
-                         return rootObject.text[0];
+            var response = await client.PostAsync("https://translate.yandex.net/api/v1.5/tr.json/translate", content);
+            //var result= Newtonsoft.Json.JsonConvert.DeserializeObject<dynamic>( response.Content.ReadAsStringAsync().Result);
 
-                     });
-                    return islem.Result;
+            return await response.Content.ReadAsStringAsync();
 
 
 
 
-                }
-                catch (Exception ex)
-                {
-                   
-                    Task<String> islem = Task.Run<String>(() =>
-                    {
-                        return "ERROR!!! " + ex.Message;
-                    });
-                    return islem.Result;
-                }
-
-            }
         }
         public XmlDocument GenerateXml()
         {
@@ -172,7 +153,7 @@ namespace AndroidXmlTranslater
                 }
                 return;
             }
-          else  if (xmlObjects.Count > 0)
+            else if (xmlObjects.Count > 0)
             {
                 using (LoadingForm frm = new LoadingForm(TranslateXml))
                 {

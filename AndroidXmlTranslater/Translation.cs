@@ -10,6 +10,8 @@ namespace AndroidXmlTranslater
     {
         public int code { get; set; }
         public string lang { get; set; }
-        public List<string> text { get; set; }
+        public List<String> text { get; set; }
+        
     }
 }
+

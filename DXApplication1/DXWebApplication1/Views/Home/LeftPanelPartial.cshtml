@@ -1,0 +1,19 @@
+<h3 class="section-caption contents-caption">Contents</h3>
+
+@Html.DevExpress().TreeView(settings => {
+    settings.Name = "tableOfContentsTreeView";
+    settings.EnableNodeTextWrapping = true;
+    settings.AllowSelectNode = true;
+    settings.Width = Unit.Percentage(100);
+    settings.SyncSelectionMode = SyncSelectionMode.None;
+    settings.NodeLinkMode = ItemLinkMode.ContentBounds;
+    settings.Styles.Node.CssClass = "tree-view-node";
+    settings.Styles.Node.HoverStyle.CssClass = "hovered";
+    settings.Styles.Elbow.CssClass = "tree-view-elbow";
+    settings.ClientSideEvents.NodeClick = "function (s, e) { HideLeftPanelIfRequired(); }";
+
+    settings.PreRender = (source, e) => {
+        ASPxTreeView treeView = (ASPxTreeView)source;
+        treeView.ExpandAll();
+    };
+}).BindToXML(Server.MapPath("~/App_Data/OverviewContents.xml"), "//Nodes/*").GetHtml()
