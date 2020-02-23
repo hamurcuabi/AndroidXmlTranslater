@@ -1,0 +1,14 @@
+<resources>
+  <string name="app_name">NYTimesApp</string>
+  <string name="article_icon">Madde Simgesi</string>
+  <string name="networkError">Oh! Wifi veya hücresel veri ağına bağlı değilsiniz. Lütfen tekrar deneyin </string>
+  <string name="networkErrorCode">NO_İNTERNET_CONNECTİON</string>
+  <string name="unknownError">Bir şeyler yanlış gitti!</string>
+  <string name="requestTimeOutError">Oooops! O zaman isteğinizi çekim yapamadık. Lütfen tekrar deneyin.</string>
+  <string name="errorCodeMalformedJson">MALFORMED_JSON</string>
+  <string name="responseMalformedJson">Oops! Bir hata çarptık. Daha sonra tekrar deneyin.</string>
+  <string name="errorCodeConnectFailed">Bağlantı başarısız oldu</string>
+  <string name="responseConnectFailed">Oops! Bağlantı zaman aşımı.</string>
+  <string name="search_hint">Arama Makaleler</string>
+  <string name="action_search">Arama</string>
+</resources>

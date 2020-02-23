@@ -12,10 +12,12 @@ namespace XmlTranslaterWeb.Controllers
         {
             return View();
         }
-        public ViewResult NotFound()
+        public ViewResult NotFound(String aspxerrorpath)
         {
+            if (!string.IsNullOrEmpty(aspxerrorpath))
+                ViewBag.Kaynak = aspxerrorpath;
             Response.StatusCode = 404;  //you may want to set this to 200
-            return View("Error");
+            return View();
         }
     }
 }
